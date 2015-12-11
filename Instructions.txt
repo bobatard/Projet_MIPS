@@ -1,0 +1,3 @@
+/* Instructions à implémenter dans le MIPS */
+
+/* Instructions de taille 32 bits */
