@@ -1,0 +1,8 @@
+    
+While:
+    ble  $t1, $0, End
+    
+    add  $t2, $t2, $t1 
+    sub  $t1, $t1, 1   
+    j    While
+End:
