@@ -1,0 +1,35 @@
+
+#test des instructions arithmétiques
+#Code C : i = (N*(N+3)-N)/N;
+#langage assembleur :
+
+#$t0=10
+#$t1=11
+
+    lw     10, 4($gp) 	  # charge N
+    add    11, 10, $zero  # copy N to $t1
+    addi   11, 11, 3	  # N+3 
+    mult   11, 11, 10     # N*(N+3) 
+    sub    11, 11, 10     # N*(N+3)-N
+    div    11, 11, 10     # (N*(N+3)-N)/N
+    sw     11, 0($gp)     # i = (N*(N+3)-N)/N
+
+#test des instructions de set(stl), de décalage(sll et srl) et de branchement de saut(beq)
+#Code C : if (i<N) { A[i] = 0;}
+#langage assembleur :
+
+#$t0=10
+#$t1=11
+
+    lw     $10, 0($gp)        # charge i 
+    lw     $11, 4($gp)        # charge N
+    slt    $11, $10, $11      # 1 dans $t1 si $t0 < $t1, 0 sinon
+    beq    $11, $zero, skip   # branchement si le resultat de slt est 0 (i.e: si (i<N))
+    sll    $10, $10, 3        # décalage à gauche de i de 3 bits
+    srl    $10, $10, 1        # décalage à droite de i de 1 bit
+    add    $10, $10, $gp      # &A[i] - 28
+    sw     $zero, 28($10)     # A[i] = 0
+
+
+
+
